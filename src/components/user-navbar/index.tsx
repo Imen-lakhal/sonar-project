@@ -20,7 +20,7 @@ const UserNavBar: FC = () => {
   const user = useAppSelector((state) => state.user);
 
   const logout = async () => {
-    const URL = '/api/logout';
+    const URL = '/api/logout'; 
 
     const response = await fetch(URL, {
       method: 'POST',

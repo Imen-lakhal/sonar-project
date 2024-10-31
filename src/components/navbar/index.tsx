@@ -21,11 +21,11 @@ const NavBar: FC<IProps> = ({ bg }) => {
       cache: 'no-cache',
       credentials: 'same-origin',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       redirect: 'follow',
       referrerPolicy: 'no-referrer',
-      body: JSON.stringify({})
+      body: JSON.stringify({}),
     });
 
     const responseInJson = await response.json();
@@ -35,30 +35,30 @@ const NavBar: FC<IProps> = ({ bg }) => {
     }
   };
 
+  const renderButton = (label: string, link?: string, onClick?: () => void) => (
+    <Button
+      fontSize={link ? '20' : 'md'}
+      color={link ? 'brand' : 'white'}
+      colorScheme={!link ? 'green' : undefined}
+      variant={link ? 'link' : undefined}
+      float="right"
+      mr="2"
+      pr="2"
+      onClick={onClick}
+    >
+      {link ? <Link href={link}>{label}</Link> : label}
+    </Button>
+  );
+
   const renderButtons = () => {
     if (user?.isValid) {
-      return (
-        <Button
-          fontSize="20"
-          color="danger"
-          variant="link"
-          float="right"
-          mr="2"
-          pr="2"
-          onClick={logout}>
-          <GrLogout />
-        </Button>
-      );
+      return renderButton(<GrLogout />, undefined, logout);
     }
 
     return (
       <>
-        <Button fontSize="20" color="brand" variant="link" float="right" mr="2" pr="2">
-          <Link href="/login">Log in</Link>
-        </Button>
-        <Button fontSize="md" colorScheme="green" color="white" m="4">
-          <Link href="/signup">Sign up</Link>
-        </Button>
+        {renderButton('Log in', '/login')}
+        {renderButton('Sign up', '/signup')}
       </>
     );
   };
@@ -66,7 +66,7 @@ const NavBar: FC<IProps> = ({ bg }) => {
   return (
     <Box bg={bg} boxShadow="md">
       <Flex>
-        <Image height="8" src="/trello-logo.svg" alt="brand logo" m="5"></Image>
+        <Image height="8" src="/trello-logo.svg" alt="brand logo" m="5" />
         <Spacer />
         {renderButtons()}
       </Flex>
@@ -75,7 +75,7 @@ const NavBar: FC<IProps> = ({ bg }) => {
 };
 
 NavBar.propTypes = {
-  bg: PropTypes.string
+  bg: PropTypes.string,
 };
 
 export default NavBar;

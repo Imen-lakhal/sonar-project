@@ -1,14 +1,11 @@
 import React from 'react';
-
-const Error = () => {
+const ErrorPage = () => {
   return (
-    <h1>
-      Galti ho gyi
-      <span role="img" aria-label="pray">
-        🙏🏻
-      </span>
-    </h1>
+    <div style={{ display: 'flex', alignItems: 'center' }}>
+    <h1 style={{ margin: 0 }}>Galti ho gyi</h1>
+    <img src="pages/images/pray.jpg" alt="Praying hands" style={{ marginLeft: '8px' }} />
+    </div>
+
   );
 };
-
-export default Error;
+export default ErrorPage;
