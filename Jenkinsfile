@@ -11,7 +11,7 @@ pipeline {
 
         stage("Checkout Source") {
             steps {
-                git branch: 'develop', credentialsId: 'github', url: 'https://github.com/henisahar/testproject.git'
+                git branch: 'main', credentialsId: 'github', url: 'https://github.com/Imen-lakhal/sonar-project.git'
             }
         }
 
