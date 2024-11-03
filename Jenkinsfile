@@ -48,6 +48,9 @@ pipeline {
 
     post {
         always {
+            script {
+                bat 'docker-compose down'
+            }
              emailext(
                 subject: "Pipline status: ${BUILD_NUMBER}",
                 body:'''
@@ -66,9 +69,7 @@ pipeline {
                 mimeType : 'text/html' 
             )
             
-            script {
-                bat 'docker-compose down'
-            }
+            
         }
     }
 }
