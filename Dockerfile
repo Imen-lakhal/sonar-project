@@ -18,4 +18,3 @@ COPY pages ./pages
 EXPOSE 3000
 
 CMD ["yarn", "dev"]
-USER nonroot
