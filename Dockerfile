@@ -1,5 +1,5 @@
 FROM node:18-bullseye-slim
-RUN addgroup -S nonroot \&& adduser -S nonroot -G nonroot
+RUN groupadd -r appuser && useradd -r -g appuser appuser
 
 
 ENV PORT 3000
