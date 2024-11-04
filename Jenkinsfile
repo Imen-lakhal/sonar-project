@@ -51,7 +51,7 @@ pipeline {
             script {
                 bat 'docker-compose down'
             }
-             emailext(
+            /* emailext(
                 subject: "Pipline status: ${BUILD_NUMBER}",
                 body:'''
                 <html>
@@ -67,7 +67,7 @@ pipeline {
                 from: 'mallek.yessmin@gmail.com',
                 replyTo : 'mallek.yessmin@gmail.com',
                 mimeType : 'text/html' 
-            )
+            )*/
             
             
         }
