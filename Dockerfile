@@ -1,4 +1,6 @@
 FROM node:18-bullseye-slim
+RUN addgroup -S nonroot \
+    && adduser -S nonroot -G nonroot
 
 RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 ENV PORT 3000
@@ -17,3 +19,4 @@ COPY pages ./pages
 EXPOSE 3000
 
 CMD ["yarn", "dev"]
+USER nonroot
