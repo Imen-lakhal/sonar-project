@@ -1,4 +1,4 @@
-FROM node:16-stretch-slim
+FROM node:18-bullseye-slim
 
 RUN groupadd -r appgroup && useradd -r -g appgroup appuser
 ENV PORT 3000
