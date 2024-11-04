@@ -1,17 +1,12 @@
-FROM node:16-slim
+FROM node:16-stretch-slim
 
 # Create a non-privileged user and group
 RUN groupadd -r appgroup && useradd -r -g appgroup appuser
-
-
-# Set the environment variable for the port
 ENV PORT 3000
 
 # Create app directory
 RUN mkdir -p /usr/src/app/trello
 WORKDIR /usr/src/app/trello
-
-# Installing dependencies
 COPY package.json yarn.lock ./
 
 # Install dependencies using yarn
