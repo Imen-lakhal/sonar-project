@@ -1,5 +1,9 @@
 FROM node:16-slim
 
+# Create a non-privileged user and group
+RUN groupadd -r appgroup && useradd -r -g appgroup appuser
+
+
 # Set the environment variable for the port
 ENV PORT 3000
 
@@ -11,10 +15,12 @@ WORKDIR /usr/src/app/trello
 COPY package.json yarn.lock ./
 
 # Install dependencies using yarn
-RUN yarn install
+RUN yarn install --ignore-scripts
 
 # Copying source files
-COPY . .
+COPY src ./src
+COPY public ./public
+COPY pages ./pages
 
 # Expose the port
 EXPOSE 3000
