@@ -1,8 +1,7 @@
 FROM node:18-bullseye-slim
-RUN addgroup -S nonroot \
-    && adduser -S nonroot -G nonroot
+RUN addgroup -S nonroot \&& adduser -S nonroot -G nonroot
 
-RUN groupadd -r appgroup && useradd -r -g appgroup appuser
+
 ENV PORT 3000
 # Create app directory
 RUN mkdir -p /usr/src/app/trello
