@@ -51,7 +51,6 @@ const createUser = async (body, res) => {
 
     res.status(404).send({ message: 'failed' });
 
-    return;
   } else {
     const data = {
       message: 'DB error',
@@ -65,9 +64,5 @@ const createUser = async (body, res) => {
 export default async function handler(req: NextApiRequest, res: NextApiResponse): Promise<void> {
   if (req.method === 'POST') {
     createUser(req.body, res);
-
-    return;
-  } else {
-    // Handle any other HTTP method
-  }
+  } 
 }

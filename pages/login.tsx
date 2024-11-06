@@ -10,7 +10,7 @@ LoginPageWithStore.getInitialProps = async (ctx) => {
 
   const userDetails = isValidUser(ctx);
 
-  if (userDetails && userDetails.isValid) {
+  if (userDetails?.isValid ) {
     ctx.res.writeHead(307, {
       Location: '/home'
     });

@@ -9,8 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (client.isConnected()) {
     const requestType = req.method;
 
-    switch (requestType) {
-      // case 'PATCH': {
+   
+      // if(requestType =='PATCH') {
       //   const { boardName, columnName, columnId } = req.body;
 
       //   const data = {
@@ -22,21 +22,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       //   const board = await db.collection('cards').updateOne({ _id: cardId }, { $set: data });
       //   res.send(board);
 
-      //   break;
+      //   return;
       // }
 
-      case 'DELETE': {
+      if(requestType == 'DELETE') {
         await db.collection('cards').deleteOne({ _id: cardId, columnId: cid });
 
         res.send({ messsage: 'Deleted' });
 
-        break;
+        return;
       }
 
-      default:
-        res.send({ message: 'Invalid request type' });
-        break;
-    }
+      res.send({ message: 'Invalid request type' });
+    
   } else {
     res.send({ msg: 'DB connection error', status: 400 });
   }

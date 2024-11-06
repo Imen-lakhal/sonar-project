@@ -39,9 +39,30 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonar') {
                     withCredentials([string(credentialsId: 'test-sonar', variable: 'sonarqube_token')]) {
-                        bat "npx sonar-scanner -Dsonar.projectKey=sonar-test -Dsonar.projectName=sonar-test -Dsonar.projectVersion=1.0 -Dsonar.sources=. -Dsonar.sourceEncoding=UTF-8 -Dsonar.token=%sonarqube_token% -Dsonar.exclusions=**/node_modules/**"
+                        bat "npx sonar-scanner -Dsonar.projectKey=sonar-test -Dsonar.projectName=sonar-test -Dsonar.projectVersion=1.0 -Dsonar.sources=. -Dsonar.sourceEncoding=UTF-8 -Dsonar.token=%sonarqube_token% -Dsonar.exclusions=**/node_modules/**,**/pages/**,**/src/**"
                     }
                 }
+            }
+        }
+        stage('Sending mail') {
+            steps {
+                 emailext(
+                subject: "Pipline status: ${BUILD_NUMBER}",
+                body:'''
+                <html>
+                    <body>
+                        <p> Build status : ${BUILD_STATUS} </p>
+                        <p> Build Number : ${BUILD_NUMBER} </p>
+                        <p> Check the <a href="${BUILD_URL}"> console output </a>.</p>
+
+                    </body>
+                </html>
+                ''',
+                to: 'Saharheni6@gmail.com',
+                from: 'mallek.yessmin@gmail.com',
+                replyTo : 'mallek.yessmin@gmail.com',
+                mimeType : 'text/html' 
+                )
             }
         }
     }

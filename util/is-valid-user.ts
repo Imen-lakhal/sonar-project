@@ -14,7 +14,7 @@ const isValidUser = (ctx): UserValidProps => {
   // Is code running on the server
   if (typeof window === 'undefined') {
     // Check if cookie is present
-    if (ctx.req && ctx.req.headers && ctx.req.headers.cookie) {
+    if ( ctx.req?.headers?.cookie) {
       const cookies = cookie.parse(ctx.req.headers.cookie);
       const token = cookies.token;
 

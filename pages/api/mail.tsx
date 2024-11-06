@@ -45,8 +45,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (client.isConnected()) {
     const requestType = req.method;
 
-    switch (requestType) {
-      case 'POST': {
+      if(requestType == 'POST') {
         const { email, boardId } = req.body;
 
         const token = uniqid();
@@ -70,10 +69,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return;
       }
 
-      default:
-        res.send({ message: 'DB error' });
-        break;
-    }
+      res.send({ message: 'DB error' });
+    
   } else {
     res.send({ msg: 'DB connection error', status: 400 });
   }

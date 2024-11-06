@@ -7,8 +7,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (client.isConnected()) {
     const requestType = req.method;
 
-    switch (requestType) {
-      case 'PATCH': {
+
+      if(requestType== 'PATCH') {
         const { email, boardId } = req.body;
         const user = await db.collection('users').findOne({ email });
         const boardData = await db.collection('boards').findOne({ _id: boardId });
@@ -29,13 +29,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           }
         }
 
-        break;
+        return;
       }
 
-      default:
-        res.send({ message: 'DB error' });
-        break;
-    }
+      res.send({ message: 'DB error' });
+    
   } else {
     res.send({ msg: 'DB connection error', status: 400 });
   }
