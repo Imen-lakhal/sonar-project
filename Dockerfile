@@ -10,6 +10,7 @@ WORKDIR /usr/src/app/trello
 
 COPY package.json yarn.lock ./
 RUN yarn install --ignore-scripts --production
+RUN yarn add --dev typescript
 COPY src ./src
 COPY public ./public
 COPY pages ./pages
