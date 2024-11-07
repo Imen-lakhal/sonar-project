@@ -46,7 +46,6 @@ pipeline {
                         -Dsonar.projectVersion=1.0 ^
                         -Dsonar.sources=. ^
                         -Dsonar.sourceEncoding=UTF-8 ^
-                        -Dsonar.token=%SONAR_TOKEN% ^
                         -Dsonar.exclusions=**/node_modules/**,**/pages/**,**/src/**
                     """
                     }
