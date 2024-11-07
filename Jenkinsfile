@@ -38,8 +38,18 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
-                        bat "npx sonar-scanner -Dsonar.projectKey=sonar-test -Dsonar.projectName=sonar-test -Dsonar.projectVersion=1.0 -Dsonar.sources=. -Dsonar.sourceEncoding=UTF-8 -Dsonar.token=${test-sonar} -Dsonar.exclusions=**/node_modules/**"
-                    
+                     withCredentials([string(credentialsId: 'test-sonar', variable: 'SONAR_TOKEN')]) {
+                     bat """
+                        npx sonar-scanner ^
+                        -Dsonar.projectKey=sonar-test ^
+                        -Dsonar.projectName=sonar-test ^
+                        -Dsonar.projectVersion=1.0 ^
+                        -Dsonar.sources=. ^
+                        -Dsonar.sourceEncoding=UTF-8 ^
+                        -Dsonar.token=%SONAR_TOKEN% ^
+                        -Dsonar.exclusions=**/node_modules/**,**/pages/**,**/src/**
+                    """
+                    }
                 }
             }
         }
