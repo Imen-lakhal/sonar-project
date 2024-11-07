@@ -44,27 +44,6 @@ pipeline {
                 }
             }
         }
-        stage('Sending mail') {
-            steps {
-                 emailext(
-                subject: "Pipline status: ${BUILD_NUMBER}",
-                body:'''
-                <html>
-                    <body>
-                        <p> Build status : ${BUILD_STATUS} </p>
-                        <p> Build Number : ${BUILD_NUMBER} </p>
-                        <p> Check the <a href="${BUILD_URL}"> console output </a>.</p>
-
-                    </body>
-                </html>
-                ''',
-                to: 'Saharheni6@gmail.com',
-                from: 'mallek.yessmin@gmail.com',
-                replyTo : 'mallek.yessmin@gmail.com',
-                mimeType : 'text/html' 
-                )
-            }
-        }
     }
 
     post {
